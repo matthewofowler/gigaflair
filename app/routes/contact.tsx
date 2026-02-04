@@ -32,8 +32,8 @@ export async function action({ request, context }: Route.ActionArgs) {
 
     try {
         const { data, error } = await resend.emails.send({
-            from: 'GigaFlair Contact Form <onboarding@resend.dev>', // Default Resend testing domain
-            to: ['matthewofowler@gmail.com'], // Deliver to the verified account email for now
+            from: 'GigaFlair Contact Form <noreply@gigaflair.com>',
+            to: ['info@gigaflair.com'],
             replyTo: email,
             subject: `New Message from ${name}`,
             html: `
