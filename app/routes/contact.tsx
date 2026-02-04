@@ -48,7 +48,7 @@ export async function action({ request, context }: Route.ActionArgs) {
         if (error) {
             console.error("Resend Error:", error);
             // Return success: false to handle error UI if we wanted
-            return { success: false, error: error.message };
+            return { success: false, error: `Resend Error: ${error.message} - ${error.name}` };
         }
 
         return { success: true };
@@ -65,7 +65,7 @@ interface ContextType {
 
 export default function Contact() {
     const { theme, toggleTheme } = useOutletContext<ContextType>();
-    const actionData = useActionData() as { success: boolean } | undefined;
+    const actionData = useActionData() as { success: boolean; error?: string; warning?: string } | undefined;
     const navigation = useNavigation();
     const isSubmitting = navigation.state === "submitting";
     const [showSuccess, setShowSuccess] = useState(false);
@@ -157,6 +157,16 @@ export default function Contact() {
                                     </p>
                                 </div>
                             </Form>
+                        )}
+                        {actionData && !actionData.success && (
+                            <div style={{ marginTop: '1rem', padding: '1rem', backgroundColor: 'rgba(255, 0, 0, 0.1)', border: '1px solid rgba(255, 0, 0, 0.2)', borderRadius: '8px', color: '#ff6b6b', fontSize: '0.9rem' }}>
+                                <strong>Error:</strong> {actionData.error || "Something went wrong."}
+                            </div>
+                        )}
+                        {actionData && actionData.warning && (
+                            <div style={{ marginTop: '1rem', padding: '1rem', backgroundColor: 'rgba(255, 165, 0, 0.1)', border: '1px solid rgba(255, 165, 0, 0.2)', borderRadius: '8px', color: '#ffb142', fontSize: '0.9rem' }}>
+                                <strong>Warning:</strong> {actionData.warning}
+                            </div>
                         )}
                     </div>
                 </div>
