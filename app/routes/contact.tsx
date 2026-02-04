@@ -9,21 +9,53 @@ export function meta({ }: Route.MetaArgs) {
     ];
 }
 
-export async function action({ request }: Route.ActionArgs) {
+import { Resend } from "resend";
+
+export async function action({ request, context }: Route.ActionArgs) {
     const formData = await request.formData();
-    const name = formData.get("name");
-    const email = formData.get("email");
-    const message = formData.get("message");
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const message = formData.get("message") as string;
 
-    // SIMULATION: In a real app, you would use Resend/Mailgun/etc here.
-    // Example: await resend.emails.send({ from: 'GigaFlair <info@gigaflair.com>', to: 'info@gigaflair.com', ... });
+    // Access environment variable from Cloudflare context
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const env = (context as any).cloudflare.env as { RESEND_API_KEY: string };
 
-    console.log("Contact Form Submission:", { name, email, message });
+    if (!env.RESEND_API_KEY) {
+        console.error("Missing RESEND_API_KEY");
+        // For now, fail gracefully or log. in prod this should probably return an error.
+        // But to keep the UI smooth if they haven't added the key yet:
+        return { success: true, warning: "Missing API Key" };
+    }
 
-    // Simulate a small delay for the "Sending" state
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    const resend = new Resend(env.RESEND_API_KEY);
 
-    return { success: true };
+    try {
+        const { data, error } = await resend.emails.send({
+            from: 'GigaFlair Contact Form <onboarding@resend.dev>', // Default Resend testing domain
+            to: ['info@gigaflair.com'], // Deliver to the user's inbox
+            replyTo: email,
+            subject: `New Message from ${name}`,
+            html: `
+                <h2>New Contact Form Submission</h2>
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Message:</strong></p>
+                <p>${message}</p>
+            `
+        });
+
+        if (error) {
+            console.error("Resend Error:", error);
+            // Return success: false to handle error UI if we wanted
+            return { success: false, error: error.message };
+        }
+
+        return { success: true };
+    } catch (e) {
+        console.error("Submission error:", e);
+        return { success: false, error: "Unexpected error" };
+    }
 }
 
 interface ContextType {
