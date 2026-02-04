@@ -1,0 +1,7 @@
+
+ ⛅️ wrangler 4.62.0
+───────────────────
+✨ Compiled Worker successfully
+⎔ Starting local server...
+[wrangler:info] Ready on http://localhost:8788
+[wrangler:info] GET / 200 OK (39ms)
