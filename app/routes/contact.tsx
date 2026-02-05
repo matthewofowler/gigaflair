@@ -1,5 +1,7 @@
 import type { Route } from "./+types/contact";
 import { Link, useOutletContext, Form, useActionData, useNavigation } from "react-router";
+import { Header } from "../components/Header";
+import { Footer } from "../components/Footer";
 import { useEffect, useState } from "react";
 
 export function meta({ }: Route.MetaArgs) {
@@ -78,25 +80,7 @@ export default function Contact() {
 
     return (
         <div className="contact-wrapper">
-            <nav>
-                <div className="container">
-                    <div className="nav-container">
-                        <Link to="/" className="logo">
-                            Giga<span>Flair</span>
-                        </Link>
-                        <ul className="nav-links">
-                            <li><Link to="/" className="nav-link">Home</Link></li>
-                            <li><Link to="/shifts" className="nav-link">Shifts</Link></li>
-                            <li>
-                                <button onClick={toggleTheme} className="theme-toggle" aria-label="Toggle Theme">
-                                    {theme === "light" ? "🌙" : "☀️"}
-                                </button>
-                            </li>
-                            <li><Link to="/contact" className="btn-primary" style={{ padding: '0.4rem 1.2rem', borderRadius: '50px', fontSize: '0.8rem' }}>Contact</Link></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+            <Header theme={theme} toggleTheme={toggleTheme} />
 
             <section className="hero" style={{ minHeight: '60vh', paddingBottom: '2rem' }}>
                 <div className="hero-glow"></div>
@@ -172,14 +156,7 @@ export default function Contact() {
                 </div>
             </section>
 
-            <footer className="section-padding">
-                <div className="container">
-                    <div style={{ textAlign: 'center' }}>
-                        <Link to="/" className="logo" style={{ marginBottom: '1.5rem', justifyContent: 'center' }}>Giga<span>Flair</span></Link>
-                        <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>Built for humans, by GigaFlair.</p>
-                    </div>
-                </div>
-            </footer>
+            <Footer />
         </div>
     );
 }

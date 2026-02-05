@@ -1,5 +1,7 @@
 import type { Route } from "./+types/shifts";
 import { Link, useOutletContext } from "react-router";
+import { Header } from "../components/Header";
+import { Footer } from "../components/Footer";
 
 export function meta({ }: Route.MetaArgs) {
     return [
@@ -18,26 +20,7 @@ export default function ShiftsPage() {
 
     return (
         <div className="product-wrapper">
-            <nav>
-                <div className="container">
-                    <div className="nav-container">
-                        <Link to="/" className="logo">
-                            Giga<span>Flair</span>
-                        </Link>
-                        <ul className="nav-links">
-                            <li><Link to="/" className="nav-link">Home</Link></li>
-                            <li><Link to="#features" className="nav-link">Features</Link></li>
-                            <li><Link to="/contact" className="nav-link">Contact</Link></li>
-                            <li>
-                                <button onClick={toggleTheme} className="theme-toggle" aria-label="Toggle Theme">
-                                    {theme === "light" ? "🌙" : "☀️"}
-                                </button>
-                            </li>
-                            <li><Link to="/contact" className="btn-primary" style={{ padding: '0.4rem 1.2rem', borderRadius: '50px', fontSize: '0.8rem' }}>Get Notified</Link></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+            <Header theme={theme} toggleTheme={toggleTheme} />
 
             <section className="hero" style={{ minHeight: '80vh' }}>
                 <div className="hero-glow"></div>
@@ -145,18 +128,7 @@ export default function ShiftsPage() {
                 </div>
             </section>
 
-            <footer className="section-padding">
-                <div className="container">
-                    <div style={{ textAlign: 'center' }}>
-                        <Link to="/" className="logo" style={{ marginBottom: '1.5rem', justifyContent: 'center' }}>Giga<span>Flair</span></Link>
-                        <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>Part of the GigaFlair ecosystem.</p>
-                        <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center' }}>
-                            <Link to="/" className="nav-link">GigaFlair Home</Link>
-                            <Link to="/contact" className="nav-link">Contact Us</Link>
-                        </div>
-                    </div>
-                </div>
-            </footer >
+            <Footer />
         </div >
     );
 }

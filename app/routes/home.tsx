@@ -1,5 +1,7 @@
 import type { Route } from "./+types/home";
 import { Link, useOutletContext } from "react-router";
+import { Header } from "../components/Header";
+import { Footer } from "../components/Footer";
 
 export function meta({ }: Route.MetaArgs) {
   return [
@@ -18,26 +20,7 @@ export default function Home() {
 
   return (
     <div className="home-wrapper">
-      <nav>
-        <div className="container">
-          <div className="nav-container">
-            <Link to="/" className="logo">
-              Giga<span>Flair</span>
-            </Link>
-            <ul className="nav-links">
-              <li><Link to="/#solutions" className="nav-link">Solutions</Link></li>
-              <li><Link to="/shifts" className="nav-link">Shifts</Link></li>
-              <li><Link to="/contact" className="nav-link">Contact</Link></li>
-              <li>
-                <button onClick={toggleTheme} className="theme-toggle" aria-label="Toggle Theme">
-                  {theme === "light" ? "🌙" : "☀️"}
-                </button>
-              </li>
-              <li><Link to="/contact" className="btn-secondary" style={{ padding: '0.4rem 1.2rem', borderRadius: '50px', fontSize: '0.8rem' }}>Get Started</Link></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+      <Header theme={theme} toggleTheme={toggleTheme} />
 
       <section className="hero">
         <div className="hero-glow"></div>
@@ -125,30 +108,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="section-padding">
-        <div className="container">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-            <div>
-              <Link to="/" className="logo" style={{ marginBottom: '1.5rem' }}>Giga<span>Flair</span></Link>
-              <p style={{ color: 'var(--text-secondary)', maxWidth: '300px' }}>
-                Empowering organizations through human-centric technology and simplified management.
-              </p>
-            </div>
-            <div style={{ display: 'flex', gap: '4rem' }}>
-              <div>
-                <h4 style={{ marginBottom: '1.5rem' }}>Solutions</h4>
-                <ul style={{ listStyle: 'none', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                  <li><Link to="/shifts" style={{ color: 'inherit', textDecoration: 'none' }}>Shifts</Link></li>
-                  <li><Link to="/contact" style={{ color: 'inherit', textDecoration: 'none' }}>Contact Us</Link></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div style={{ marginTop: '4rem', paddingTop: '2rem', borderTop: '1px solid rgba(255,255,255,0.05)', color: 'var(--text-secondary)', fontSize: '0.8rem', textAlign: 'center' }}>
-            © {new Date().getFullYear()} GigaFlair LLC. All rights reserved.
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
