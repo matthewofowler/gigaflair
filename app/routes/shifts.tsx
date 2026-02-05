@@ -1,9 +1,9 @@
-import type { Route } from "./+types/rosterflair";
+import type { Route } from "./+types/shifts";
 import { Link, useOutletContext } from "react-router";
 
 export function meta({ }: Route.MetaArgs) {
     return [
-        { title: "RosterFlair | Staffing Reimagined" },
+        { title: "Shifts | Staffing Reimagined" },
         { name: "description", content: "The intuitive volunteer, seasonal, and deskless staff management platform." },
     ];
 }
@@ -13,7 +13,7 @@ interface ContextType {
     toggleTheme: () => void;
 }
 
-export default function RosterFlair() {
+export default function ShiftsPage() {
     const { theme, toggleTheme } = useOutletContext<ContextType>();
 
     return (
@@ -22,7 +22,7 @@ export default function RosterFlair() {
                 <div className="container">
                     <div className="nav-container">
                         <Link to="/" className="logo">
-                            GIGA<span>FLAIR</span>
+                            Giga<span>Flair</span>
                         </Link>
                         <ul className="nav-links">
                             <li><Link to="/" className="nav-link">Home</Link></li>
@@ -44,13 +44,13 @@ export default function RosterFlair() {
                 <div className="container">
                     <div className="hero-content animate-fade">
                         <span style={{ color: 'var(--brand-accent)', fontWeight: 700, textTransform: 'uppercase', fontSize: '0.9rem', letterSpacing: '0.1em' }}>Staffing Reimagined</span>
-                        <h1 className="gradient-text" style={{ fontSize: 'clamp(3rem, 7vw, 4rem)', marginTop: '1rem' }}>RosterFlair</h1>
+                        <h1 className="gradient-text" style={{ fontSize: 'clamp(3rem, 7vw, 4rem)', marginTop: '1rem' }}>GigaFlair Shifts</h1>
                         <p>
                             The intuitive volunteer, seasonal, and deskless staff management platform designed to help
                             organizations save money and reduce hours of unnecessary administrative work.
                         </p>
                         <p style={{ marginTop: '-1.5rem', marginBottom: '3rem', color: 'var(--brand-primary)', fontWeight: 600 }}>
-                            Recycle your old paper training binders and get RosterFlair.
+                            Recycle your old paper training binders and get GigaFlair Shifts.
                         </p>
                         <div className="hero-actions" style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
                             <Link to="/contact" className="btn-primary">
@@ -148,7 +148,7 @@ export default function RosterFlair() {
             <footer className="section-padding">
                 <div className="container">
                     <div style={{ textAlign: 'center' }}>
-                        <Link to="/" className="logo" style={{ marginBottom: '1.5rem', justifyContent: 'center' }}>GIGA<span>FLAIR</span></Link>
+                        <Link to="/" className="logo" style={{ marginBottom: '1.5rem', justifyContent: 'center' }}>Giga<span>Flair</span></Link>
                         <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>Part of the GigaFlair ecosystem.</p>
                         <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center' }}>
                             <Link to="/" className="nav-link">GigaFlair Home</Link>

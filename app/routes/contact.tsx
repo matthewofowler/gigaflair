@@ -82,11 +82,11 @@ export default function Contact() {
                 <div className="container">
                     <div className="nav-container">
                         <Link to="/" className="logo">
-                            GIGA<span>FLAIR</span>
+                            Giga<span>Flair</span>
                         </Link>
                         <ul className="nav-links">
                             <li><Link to="/" className="nav-link">Home</Link></li>
-                            <li><Link to="/rosterflair" className="nav-link">RosterFlair</Link></li>
+                            <li><Link to="/shifts" className="nav-link">Shifts</Link></li>
                             <li>
                                 <button onClick={toggleTheme} className="theme-toggle" aria-label="Toggle Theme">
                                     {theme === "light" ? "🌙" : "☀️"}
@@ -175,7 +175,7 @@ export default function Contact() {
             <footer className="section-padding">
                 <div className="container">
                     <div style={{ textAlign: 'center' }}>
-                        <Link to="/" className="logo" style={{ marginBottom: '1.5rem', justifyContent: 'center' }}>GIGA<span>FLAIR</span></Link>
+                        <Link to="/" className="logo" style={{ marginBottom: '1.5rem', justifyContent: 'center' }}>Giga<span>Flair</span></Link>
                         <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>Built for humans, by GigaFlair.</p>
                     </div>
                 </div>

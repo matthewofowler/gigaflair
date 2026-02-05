@@ -22,11 +22,11 @@ export default function Home() {
         <div className="container">
           <div className="nav-container">
             <Link to="/" className="logo">
-              GIGA<span>FLAIR</span>
+              Giga<span>Flair</span>
             </Link>
             <ul className="nav-links">
               <li><Link to="/#solutions" className="nav-link">Solutions</Link></li>
-              <li><Link to="/rosterflair" className="nav-link">RosterFlair</Link></li>
+              <li><Link to="/shifts" className="nav-link">Shifts</Link></li>
               <li><Link to="/contact" className="nav-link">Contact</Link></li>
               <li>
                 <button onClick={toggleTheme} className="theme-toggle" aria-label="Toggle Theme">
@@ -49,8 +49,8 @@ export default function Home() {
               and empower every individual to use the tools they need, securely and efficiently.
             </p>
             <div className="hero-actions" style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
-              <Link to="/rosterflair" className="btn-primary">
-                Explore RosterFlair
+              <Link to="/shifts" className="btn-primary">
+                Explore Shifts
               </Link>
               <Link to="/contact" className="btn-secondary">
                 Get in Touch
@@ -100,13 +100,13 @@ export default function Home() {
           <div className="glass-card" style={{ padding: '4rem', display: 'flex', alignItems: 'center', gap: '4rem', overflow: 'hidden' }}>
             <div style={{ flex: 1 }}>
               <span style={{ color: 'var(--brand-primary)', fontWeight: 700, textTransform: 'uppercase', fontSize: '0.8rem' }}>Flagship Product</span>
-              <h2 style={{ fontSize: '3rem', margin: '1rem 0' }}>RosterFlair</h2>
+              <h2 style={{ fontSize: '3rem', margin: '1rem 0' }}>GigaFlair Shifts</h2>
               <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', marginBottom: '2rem' }}>
                 The intuitive volunteer, seasonal, and deskless staff management platform designed to help
                 organizations save money and reduce hours of unnecessary administrative work.
               </p>
-              <Link to="/rosterflair" className="btn-primary">
-                Learn More about RosterFlair
+              <Link to="/shifts" className="btn-primary">
+                Learn More about Shifts
               </Link>
             </div>
             <div style={{ flex: 1, position: 'relative' }}>
@@ -129,7 +129,7 @@ export default function Home() {
         <div className="container">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
             <div>
-              <Link to="/" className="logo" style={{ marginBottom: '1.5rem' }}>GIGA<span>FLAIR</span></Link>
+              <Link to="/" className="logo" style={{ marginBottom: '1.5rem' }}>Giga<span>Flair</span></Link>
               <p style={{ color: 'var(--text-secondary)', maxWidth: '300px' }}>
                 Empowering organizations through human-centric technology and simplified management.
               </p>
@@ -138,7 +138,7 @@ export default function Home() {
               <div>
                 <h4 style={{ marginBottom: '1.5rem' }}>Solutions</h4>
                 <ul style={{ listStyle: 'none', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                  <li><Link to="/rosterflair" style={{ color: 'inherit', textDecoration: 'none' }}>RosterFlair</Link></li>
+                  <li><Link to="/shifts" style={{ color: 'inherit', textDecoration: 'none' }}>Shifts</Link></li>
                   <li><Link to="/contact" style={{ color: 'inherit', textDecoration: 'none' }}>Contact Us</Link></li>
                 </ul>
               </div>
