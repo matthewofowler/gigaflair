@@ -53,7 +53,7 @@ export function Header({ theme, toggleTheme }: { theme: string; toggleTheme: () 
 
             {/* Mobile Menu Overlay */}
             <div className={`mobile-menu-overlay ${isMenuOpen ? 'active' : ''}`} onClick={closeMenu}>
-                <div className="mobile-menu-content" onClick={(e) => e.stopPropagation()}>
+                <div className="mobile-menu-content">
                     <ul className="mobile-nav-links">
                         <li><Link to="/" className="mobile-nav-link" onClick={closeMenu}>Home</Link></li>
                         <li><Link to="/#solutions" className="mobile-nav-link" onClick={closeMenu}>Solutions</Link></li>
