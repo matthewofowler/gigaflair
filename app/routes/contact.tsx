@@ -21,12 +21,29 @@ export async function action({ request, context }: Route.ActionArgs) {
 
     // Access environment variable from Cloudflare context
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const env = (context as any).cloudflare.env as { RESEND_API_KEY: string };
+    const env = (context as any).cloudflare.env as {
+        RESEND_API_KEY: string;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        RATE_LIMITS: any;
+    };
+
+    // Rate Limiting
+    const ip = request.headers.get("CF-Connecting-IP") || "127.0.0.1";
+
+    if (env.RATE_LIMITS) {
+        const limitKey = `contact_limit:${ip}`;
+        const currentCount = await env.RATE_LIMITS.get(limitKey);
+        const count = currentCount ? parseInt(currentCount) : 0;
+
+        if (count >= 10) {
+            return { success: false, error: "Too many requests. Please try again in an hour." };
+        }
+
+        await env.RATE_LIMITS.put(limitKey, (count + 1).toString(), { expirationTtl: 3600 });
+    }
 
     if (!env.RESEND_API_KEY) {
         console.error("Missing RESEND_API_KEY");
-        // For now, fail gracefully or log. in prod this should probably return an error.
-        // But to keep the UI smooth if they haven't added the key yet:
         return { success: true, warning: "Missing API Key" };
     }
 
