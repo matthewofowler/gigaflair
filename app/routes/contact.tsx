@@ -32,6 +32,15 @@ export async function action({ request, context }: Route.ActionArgs) {
 
     const resend = new Resend(env.RESEND_API_KEY);
 
+    const escapeHtml = (unsafe: string) => {
+        return unsafe
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    };
+
     try {
         const { data, error } = await resend.emails.send({
             from: 'GigaFlair Contact Form <noreply@gigaflair.com>',
@@ -40,10 +49,10 @@ export async function action({ request, context }: Route.ActionArgs) {
             subject: `New Message from ${name}`,
             html: `
                 <h2>New Contact Form Submission</h2>
-                <p><strong>Name:</strong> ${name}</p>
-                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+                <p><strong>Email:</strong> ${escapeHtml(email)}</p>
                 <p><strong>Message:</strong></p>
-                <p>${message}</p>
+                <p>${escapeHtml(message).replace(/\n/g, '<br/>')}</p>
             `
         });
 
