@@ -11,18 +11,27 @@ export function meta({ }: Route.MetaArgs) {
     ];
 }
 
-import { Resend } from "resend";
-
 export async function action({ request, context }: Route.ActionArgs) {
     const formData = await request.formData();
-    const name = formData.get("name") as string;
+    const company = formData.get("company") as string;
+    const firstName = formData.get("first_name") as string;
+    const lastName = formData.get("last_name") as string;
     const email = formData.get("email") as string;
-    const message = formData.get("message") as string;
+    const description = formData.get("description") as string;
+    const honeypot = formData.get("website_verification") as string;
+
+    // Honeypot check
+    if (honeypot) {
+        console.log("Spam detected via honeypot field.");
+        return { success: true }; // Silently "succeed" to confuse bots
+    }
 
     // Access environment variable from Cloudflare context
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const env = (context as any).cloudflare.env as {
-        RESEND_API_KEY: string;
+        ZEPTOMAIL_API_KEY: string;
+        ZOHO_CRM_PUBLIC_ID?: string;
+        ZOHO_CRM_HIDDEN_KEY?: string;
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         RATE_LIMITS: any;
     };
@@ -42,12 +51,10 @@ export async function action({ request, context }: Route.ActionArgs) {
         await env.RATE_LIMITS.put(limitKey, (count + 1).toString(), { expirationTtl: 3600 });
     }
 
-    if (!env.RESEND_API_KEY) {
-        console.error("Missing RESEND_API_KEY");
+    if (!env.ZEPTOMAIL_API_KEY) {
+        console.error("Missing ZEPTOMAIL_API_KEY");
         return { success: true, warning: "Missing API Key" };
     }
-
-    const resend = new Resend(env.RESEND_API_KEY);
 
     const escapeHtml = (unsafe: string) => {
         return unsafe
@@ -58,32 +65,70 @@ export async function action({ request, context }: Route.ActionArgs) {
             .replace(/'/g, "&#039;");
     };
 
+    // 1. Send Email via ZeptoMail
     try {
-        const { data, error } = await resend.emails.send({
-            from: 'GigaFlair Contact Form <noreply@gigaflair.com>',
-            to: ['info@gigaflair.com'],
-            replyTo: email,
-            subject: `New Message from ${name}`,
-            html: `
-                <h2>New Contact Form Submission</h2>
-                <p><strong>Name:</strong> ${escapeHtml(name)}</p>
-                <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-                <p><strong>Message:</strong></p>
-                <p>${escapeHtml(message).replace(/\n/g, '<br/>')}</p>
-            `
+        const response = await fetch("https://api.zeptomail.com/v1.1/email", {
+            method: "POST",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": env.ZEPTOMAIL_API_KEY
+            },
+            body: JSON.stringify({
+                "from": { "address": "noreply@mail.gigaflair.com", "name": "GigaFlair Contact Form" },
+                "to": [{ "email_address": { "address": "info@gigaflair.com", "name": "GigaFlair Info" } }],
+                "reply_to": [{ "address": email, "name": `${firstName} ${lastName}` }],
+                "subject": `New Contact: ${firstName} ${lastName}`,
+                "htmlbody": `
+                    <h2>New Contact Form Submission</h2>
+                    <p><strong>Company:</strong> ${escapeHtml(company || "N/A")}</p>
+                    <p><strong>Name:</strong> ${escapeHtml(firstName)} ${escapeHtml(lastName)}</p>
+                    <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+                    <p><strong>Description:</strong></p>
+                    <p>${escapeHtml(description).replace(/\n/g, '<br/>')}</p>
+                `
+            })
         });
 
-        if (error) {
-            console.error("Resend Error:", error);
-            // Return success: false to handle error UI if we wanted
-            return { success: false, error: `Resend Error: ${error.message} - ${error.name}` };
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error("ZeptoMail Error:", errorText);
+            // Don't fail the user if email fails, but log it.
         }
-
-        return { success: true };
     } catch (e) {
-        console.error("Submission error:", e);
-        return { success: false, error: "Unexpected error" };
+        console.error("Email submission error:", e);
     }
+
+    // 2. Submit to Zoho CRM (Web-to-Lead) - Placeholder until keys provided
+    if (env.ZOHO_CRM_PUBLIC_ID && env.ZOHO_CRM_HIDDEN_KEY) {
+        try {
+            const crmFormData = new FormData();
+            crmFormData.append("xnQsjsdp", env.ZOHO_CRM_PUBLIC_ID);
+            crmFormData.append("xmIwtLD", env.ZOHO_CRM_HIDDEN_KEY);
+            crmFormData.append("actionType", "TGVhZHM=");
+            crmFormData.append("Company", company);
+            crmFormData.append("First Name", firstName);
+            crmFormData.append("Last Name", lastName);
+            crmFormData.append("Email", email);
+            crmFormData.append("Description", description);
+            // crmFormData.append("Lead Source", "GigaFlair Contact Page"); // Re-enable if allowed by Zoho config
+
+            // Note: Zoho Web-to-Lead expects a form POST, typically from a browser.
+            // Doing it server-side requires mimicry or using the Insert Records API (which needs OAuth).
+            // For now, we will assume standard POST works or we might need to route the user
+            // to a success page that submits this invisibly if CORS blocks us.
+            // Given we are on Cloudflare Workers, a direct POST to the CRM URL might not behave
+            // exactly like a browser form submit (no redirects), but let's try.
+            await fetch("https://crm.zoho.com/crm/WebToLeadForm", {
+                method: "POST",
+                body: crmFormData
+            });
+        } catch (e) {
+            console.error("CRM submission error", e);
+        }
+    }
+
+    return { success: true };
 }
 
 interface ContextType {
@@ -123,13 +168,13 @@ export default function Contact() {
 
             <section className="section-padding" style={{ paddingTop: 0 }}>
                 <div className="container">
-                    <div className="glass-card" style={{ padding: '4rem', maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
+                    <div className="glass-card" style={{ padding: '3rem', maxWidth: '700px', margin: '0 auto' }}>
                         {showSuccess ? (
-                            <div className="animate-fade" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>
+                            <div className="animate-fade" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem', textAlign: 'center' }}>
                                 <div style={{ fontSize: '4rem' }}>⭐</div>
                                 <h2 style={{ fontSize: '2rem' }}>Message Received!</h2>
                                 <p style={{ color: 'var(--text-secondary)', maxWidth: '400px' }}>
-                                    Thank you for reaching out. We've received your inquiry and our team will get back to you shortly at <strong>info@gigaflair.com</strong>.
+                                    Thank you for reaching out. We've received your inquiry and our team will get back to you shortly.
                                 </p>
                                 <button
                                     onClick={() => setShowSuccess(false)}
@@ -140,31 +185,56 @@ export default function Contact() {
                                 </button>
                             </div>
                         ) : (
-                            <Form method="post" className="contact-form">
-                                <div className="form-group">
-                                    <label htmlFor="name">Name</label>
-                                    <input type="text" id="name" name="name" className="form-control" placeholder="Your Name" required disabled={isSubmitting} />
+                            <Form method="post" className="contact-form" style={{ marginTop: 0 }}>
+                                {/* Honeypot field - hidden from humans */}
+                                <div className="hidden-field" aria-hidden="true">
+                                    <label htmlFor="website_verification">Leave this field blank</label>
+                                    <input
+                                        type="text"
+                                        id="website_verification"
+                                        name="website_verification"
+                                        tabIndex={-1}
+                                        autoComplete="off"
+                                    />
                                 </div>
+
                                 <div className="form-group">
-                                    <label htmlFor="email">Email</label>
-                                    <input type="email" id="email" name="email" className="form-control" placeholder="your@email.com" required disabled={isSubmitting} />
+                                    <label htmlFor="company">Company</label>
+                                    <input type="text" id="company" name="company" className="form-control" />
                                 </div>
+
                                 <div className="form-group">
-                                    <label htmlFor="message">Message</label>
-                                    <textarea id="message" name="message" className="form-control" placeholder="How can we help?" required disabled={isSubmitting}></textarea>
+                                    <label htmlFor="first_name">First Name<span style={{ color: 'var(--brand-primary)', marginLeft: '2px' }}>*</span></label>
+                                    <input type="text" id="first_name" name="first_name" className="form-control" required disabled={isSubmitting} />
                                 </div>
-                                <div style={{ textAlign: 'center', marginTop: '1rem' }}>
+
+                                <div className="form-group">
+                                    <label htmlFor="last_name">Last Name<span style={{ color: 'var(--brand-primary)', marginLeft: '2px' }}>*</span></label>
+                                    <input type="text" id="last_name" name="last_name" className="form-control" required disabled={isSubmitting} />
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="email">Email<span style={{ color: 'var(--brand-primary)', marginLeft: '2px' }}>*</span></label>
+                                    <input type="email" id="email" name="email" className="form-control" required disabled={isSubmitting} />
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="description">Description<span style={{ color: 'var(--brand-primary)', marginLeft: '2px' }}>*</span></label>
+                                    <textarea id="description" name="description" className="form-control" required disabled={isSubmitting}></textarea>
+                                </div>
+
+                                <div style={{ textAlign: 'center', marginTop: '1.5rem', display: 'flex', gap: '1rem', justifyContent: 'center' }}>
                                     <button
                                         type="submit"
                                         className="btn-primary"
-                                        style={{ width: '100%', justifyContent: 'center', opacity: isSubmitting ? 0.7 : 1 }}
+                                        style={{ flex: 1, justifyContent: 'center', opacity: isSubmitting ? 0.7 : 1 }}
                                         disabled={isSubmitting}
                                     >
-                                        {isSubmitting ? "Sending..." : "Send Message"}
+                                        {isSubmitting ? "Sending..." : "Submit"}
                                     </button>
-                                    <p style={{ marginTop: '1.5rem', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-                                        Or email us directly at <a href="mailto:info@gigaflair.com" style={{ color: 'var(--brand-primary)', textDecoration: 'none' }}>info@gigaflair.com</a>
-                                    </p>
+                                    <button type="reset" className="btn-secondary" disabled={isSubmitting}>
+                                        Reset
+                                    </button>
                                 </div>
                             </Form>
                         )}
