@@ -72,7 +72,7 @@ export default function ShiftsPage() {
                             <div style={{ flex: 1 }}>
                                 <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Instant Communications</h2>
                                 <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem' }}>
-                                    Reach your entire team instantly via Email or SMS. Whether it's an urgent schedule change or a general announcement, keep everyone aligned.
+                                    Reach your entire team instantly via Shifts notifications and Email. Whether it's an urgent schedule change or a general announcement, keep everyone aligned.
                                 </p>
                             </div>
                         </div>
