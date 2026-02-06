@@ -54,12 +54,12 @@ export default function ShiftsPage() {
                         {/* Feature 1 */}
                         <div style={{ display: 'flex', alignItems: 'center', gap: '4rem', marginBottom: '6rem', flexDirection: 'row' }}>
                             <div style={{ flex: 1 }}>
-                                <img src="/feature-staff.png" alt="Staff Management Interface" style={{ width: '100%', borderRadius: '12px', border: '1px solid var(--glass-border)', boxShadow: '0 20px 40px -10px rgba(0,0,0,0.3)' }} />
+                                <img src="/admin-schedule.png" alt="Admin Schedule Dashboard" style={{ width: '100%', borderRadius: '12px', border: '1px solid var(--glass-border)', boxShadow: '0 20px 40px -10px rgba(0,0,0,0.3)' }} />
                             </div>
                             <div style={{ flex: 1 }}>
-                                <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Effortless Staff Management</h2>
+                                <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Next-Gen Scheduling</h2>
                                 <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem' }}>
-                                    Stop wrestling with spreadsheets. Our centralized staff directory lets you manage roles, groups, and status in one intuitive view.
+                                    Effortlessly manage shifts with our real-time dashboard. The integrated 'Pending Requests' sidebar allows admins to quickly approve or deny shift trades and drops, keeping your schedule fluid and updated.
                                 </p>
                             </div>
                         </div>
@@ -67,26 +67,46 @@ export default function ShiftsPage() {
                         {/* Feature 2 */}
                         <div style={{ display: 'flex', alignItems: 'center', gap: '4rem', marginBottom: '6rem', flexDirection: 'row-reverse' }}>
                             <div style={{ flex: 1 }}>
-                                <img src="/feature-comms.png" alt="Communications Hub" style={{ width: '100%', borderRadius: '12px', border: '1px solid var(--glass-border)', boxShadow: '0 20px 40px -10px rgba(0,0,0,0.3)' }} />
+                                <img src="/admin-alerts.png" alt="Communications Hub" style={{ width: '100%', borderRadius: '12px', border: '1px solid var(--glass-border)', boxShadow: '0 20px 40px -10px rgba(0,0,0,0.3)' }} />
                             </div>
                             <div style={{ flex: 1 }}>
                                 <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Instant Communications</h2>
                                 <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem' }}>
-                                    Reach your entire team instantly via Shifts notifications and Email. Whether it's an urgent schedule change or a general announcement, keep everyone aligned.
+                                    Reach your entire team instantly via Shifts notifications and Email. The Communications Hub gives admins a single place to compose urgent alerts or pin essential announcements to worker dashboards.
                                 </p>
                             </div>
                         </div>
 
                         {/* Feature 3 */}
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '4rem', flexDirection: 'row' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '4rem', marginBottom: '6rem', flexDirection: 'row' }}>
                             <div style={{ flex: 1 }}>
-                                <img src="/feature-access.png" alt="Worker Access Screen" style={{ width: '100%', borderRadius: '12px', border: '1px solid var(--glass-border)', boxShadow: '0 20px 40px -10px rgba(0,0,0,0.3)' }} />
+                                <img src="/shifts-login.png" alt="Worker Access Screen" style={{ width: '100%', borderRadius: '12px', border: '1px solid var(--glass-border)', boxShadow: '0 20px 40px -10px rgba(0,0,0,0.3)' }} />
                             </div>
                             <div style={{ flex: 1 }}>
                                 <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Frictionless Access</h2>
                                 <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem' }}>
-                                    No passwords to forget. Secure "Magic Link" login makes it incredibly easy for seasonal and volunteer staff to access their schedules immediately.
+                                    No passwords to forget. Secure "Magic Link" login makes it incredibly easy for seasonal, volunteer, and deskless staff to access their schedules and training materials immediately.
                                 </p>
+                            </div>
+                        </div>
+
+                        {/* Feature 4: Worker Experience */}
+                        <div style={{ padding: '4rem', background: 'rgba(255,255,255,0.02)', borderRadius: '24px', border: '1px solid var(--glass-border)' }}>
+                            <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+                                <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Empower Your Workforce</h2>
+                                <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem' }}>A seamless experience designed for the people doing the work.</p>
+                            </div>
+                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
+                                <div>
+                                    <img src="/worker-alerts.png" alt="Worker Alerts" style={{ width: '100%', borderRadius: '12px', marginBottom: '1.5rem', border: '1px solid var(--glass-border)' }} />
+                                    <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Stay Informed</h3>
+                                    <p style={{ color: 'var(--text-secondary)' }}>Workers get a clear, prioritized view of communications from management, ensuring important safety info and schedule changes are never missed.</p>
+                                </div>
+                                <div>
+                                    <img src="/worker-documents.png" alt="Worker Documents" style={{ width: '100%', borderRadius: '12px', marginBottom: '1.5rem', border: '1px solid var(--glass-border)' }} />
+                                    <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>On-the-Go Training</h3>
+                                    <p style={{ color: 'var(--text-secondary)' }}>Digitize your training binders. The Documents Hub provides staff with instant access to policies, handbooks, and training materials from any device.</p>
+                                </div>
                             </div>
                         </div>
 

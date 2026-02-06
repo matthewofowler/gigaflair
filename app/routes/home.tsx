@@ -94,8 +94,8 @@ export default function Home() {
             </div>
             <div style={{ flex: 1, position: 'relative' }}>
               <img
-                src="/rosterflair-preview.png"
-                alt="RosterFlair Schedule Dashboard"
+                src="/admin-schedule.png"
+                alt="GigaFlair Shifts Schedule Dashboard"
                 style={{
                   width: '100%',
                   borderRadius: '12px',

@@ -8,7 +8,7 @@ export function Footer() {
                     <div className="footer-brand">
                         <Link to="/" className="logo" style={{ marginBottom: '1.5rem' }}>Giga<span>Flair</span></Link>
                         <p className="footer-description">
-                            Empowering organizations through human-centric technology and simplified management.
+                            Empowering organizations through simplified technology and management solutions.
                         </p>
                     </div>
                     <div className="footer-links-container">
