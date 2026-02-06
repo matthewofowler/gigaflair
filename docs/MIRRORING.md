@@ -22,6 +22,28 @@ git push all main
 ## Data Strategy
 As a landing page, GigaFlair is primarily driven by code. All "data" (layout, text, assets) is contained within the mirrored repository. No independent production database is utilized, maximizing simplicity and security.
 
+## Deployment Workflow
+
+This project separates **Backups** (Triple-Push) from **Deployments** (Live Site) for maximum safety.
+
+### 1. Backup (Always First)
+This mirrors your implementation across GitHub, GitLab, and Local.
+```bash
+git push all main
+```
+
+### 2. Testing (Optional)
+This creates a private preview URL to check the site before it's live.
+```bash
+npm run deploy:preview
+```
+
+### 3. Go Live (Production)
+This pushes the current build to `gigaflair.com`.
+```bash
+npm run deploy
+```
+
 ## Setup Details
 
 ### Local Bare Repository

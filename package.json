@@ -6,7 +6,9 @@
     "build": "react-router build",
     "dev": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
-    "typecheck": "react-router typegen && tsc"
+    "typecheck": "react-router typegen && tsc",
+    "deploy": "npm run build && wrangler pages deploy ./build/client --branch main",
+    "deploy:preview": "npm run build && wrangler pages deploy ./build/client"
   },
   "dependencies": {
     "@react-router/cloudflare": "^7.13.0",
