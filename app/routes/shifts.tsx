@@ -54,7 +54,7 @@ export default function ShiftsPage() {
                         {/* Feature 1 */}
                         <div style={{ display: 'flex', alignItems: 'center', gap: '4rem', marginBottom: '6rem', flexDirection: 'row' }}>
                             <div style={{ flex: 1 }}>
-                                <img src="/admin-schedule.png" alt="Admin Schedule Dashboard" style={{ width: '100%', borderRadius: '12px', border: '1px solid var(--glass-border)', boxShadow: '0 20px 40px -10px rgba(0,0,0,0.3)' }} />
+                                <img src="/admin-schedule-v2.png" alt="Admin Schedule Dashboard" style={{ width: '100%', borderRadius: '12px', border: '1px solid var(--glass-border)', boxShadow: '0 20px 40px -10px rgba(0,0,0,0.3)' }} />
                             </div>
                             <div style={{ flex: 1 }}>
                                 <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Next-Gen Scheduling</h2>
@@ -67,7 +67,7 @@ export default function ShiftsPage() {
                         {/* Feature 2 */}
                         <div style={{ display: 'flex', alignItems: 'center', gap: '4rem', marginBottom: '6rem', flexDirection: 'row-reverse' }}>
                             <div style={{ flex: 1 }}>
-                                <img src="/admin-alerts.png" alt="Communications Hub" style={{ width: '100%', borderRadius: '12px', border: '1px solid var(--glass-border)', boxShadow: '0 20px 40px -10px rgba(0,0,0,0.3)' }} />
+                                <img src="/admin-alerts-v2.png" alt="Communications Hub" style={{ width: '100%', borderRadius: '12px', border: '1px solid var(--glass-border)', boxShadow: '0 20px 40px -10px rgba(0,0,0,0.3)' }} />
                             </div>
                             <div style={{ flex: 1 }}>
                                 <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Instant Communications</h2>
@@ -80,7 +80,7 @@ export default function ShiftsPage() {
                         {/* Feature 3 */}
                         <div style={{ display: 'flex', alignItems: 'center', gap: '4rem', marginBottom: '6rem', flexDirection: 'row' }}>
                             <div style={{ flex: 1 }}>
-                                <img src="/shifts-login.png" alt="Worker Access Screen" style={{ width: '100%', borderRadius: '12px', border: '1px solid var(--glass-border)', boxShadow: '0 20px 40px -10px rgba(0,0,0,0.3)' }} />
+                                <img src="/shifts-login-v2.png" alt="Worker Access Screen" style={{ width: '100%', borderRadius: '12px', border: '1px solid var(--glass-border)', boxShadow: '0 20px 40px -10px rgba(0,0,0,0.3)' }} />
                             </div>
                             <div style={{ flex: 1 }}>
                                 <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Frictionless Access</h2>
@@ -98,12 +98,12 @@ export default function ShiftsPage() {
                             </div>
                             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
                                 <div>
-                                    <img src="/worker-alerts.png" alt="Worker Alerts" style={{ width: '100%', borderRadius: '12px', marginBottom: '1.5rem', border: '1px solid var(--glass-border)' }} />
+                                    <img src="/worker-alerts-v2.png" alt="Worker Alerts" style={{ width: '100%', borderRadius: '12px', marginBottom: '1.5rem', border: '1px solid var(--glass-border)' }} />
                                     <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Stay Informed</h3>
                                     <p style={{ color: 'var(--text-secondary)' }}>Workers get a clear, prioritized view of communications from management, ensuring important safety info and schedule changes are never missed.</p>
                                 </div>
                                 <div>
-                                    <img src="/worker-documents.png" alt="Worker Documents" style={{ width: '100%', borderRadius: '12px', marginBottom: '1.5rem', border: '1px solid var(--glass-border)' }} />
+                                    <img src="/worker-documents-v2.png" alt="Worker Documents" style={{ width: '100%', borderRadius: '12px', marginBottom: '1.5rem', border: '1px solid var(--glass-border)' }} />
                                     <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>On-the-Go Training</h3>
                                     <p style={{ color: 'var(--text-secondary)' }}>Digitize your training binders. The Documents Hub provides staff with instant access to policies, handbooks, and training materials from any device.</p>
                                 </div>

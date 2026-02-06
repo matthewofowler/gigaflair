@@ -19,6 +19,23 @@ To synchronize all three backup locations at once, use the `all` remote:
 git push all main
 ```
 
+## Data Backup Strategy
+
+In addition to code mirroring, we maintain a tiered database backup rotation in the local mirror folder.
+
+### Rotation Policy
+- **Hourly (Last 24h):** Captures every backup taken in the last 24 hours.
+- **Daily (Days 1-14):** Keeps the first backup of each day for two weeks.
+
+### How to Backup Data
+Run the following command to export the current production database and prune old backups:
+```bash
+npm run db:backup
+```
+
+The backups are saved as `.sql` files in:
+`/Users/matthewfowler/Documents/GitRepo/gigaflair.git/backups`
+
 ## Setup Details
 
 ### Local Bare Repository
