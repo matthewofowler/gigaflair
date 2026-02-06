@@ -50,11 +50,12 @@ export default function ShiftsPage() {
             <section id="features" className="section-padding">
                 <div className="container">
                     <div style={{ marginBottom: '6rem' }}>
-
                         {/* Feature 1 */}
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '4rem', marginBottom: '6rem', flexDirection: 'row' }}>
-                            <div style={{ flex: 1 }}>
-                                <img src="/admin-schedule-v2.png" alt="Admin Schedule Dashboard" style={{ width: '100%', borderRadius: '12px', border: '1px solid var(--glass-border)', boxShadow: '0 20px 40px -10px rgba(0,0,0,0.3)' }} />
+                        <div className="responsive-flex" style={{ marginBottom: '6rem' }}>
+                            <div style={{ flex: 1, width: '100%' }}>
+                                <div className="image-container-structured">
+                                    <img src="/admin-schedule-v2.png" alt="Admin Schedule Dashboard" />
+                                </div>
                             </div>
                             <div style={{ flex: 1 }}>
                                 <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Next-Gen Scheduling</h2>
@@ -65,9 +66,11 @@ export default function ShiftsPage() {
                         </div>
 
                         {/* Feature 2 */}
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '4rem', marginBottom: '6rem', flexDirection: 'row-reverse' }}>
-                            <div style={{ flex: 1 }}>
-                                <img src="/admin-alerts-v2.png" alt="Communications Hub" style={{ width: '100%', borderRadius: '12px', border: '1px solid var(--glass-border)', boxShadow: '0 20px 40px -10px rgba(0,0,0,0.3)' }} />
+                        <div className="responsive-flex flex-reverse" style={{ marginBottom: '6rem' }}>
+                            <div style={{ flex: 1, width: '100%' }}>
+                                <div className="image-container-structured">
+                                    <img src="/admin-alerts-v2.png" alt="Communications Hub" />
+                                </div>
                             </div>
                             <div style={{ flex: 1 }}>
                                 <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Instant Communications</h2>
@@ -78,9 +81,11 @@ export default function ShiftsPage() {
                         </div>
 
                         {/* Feature 3 */}
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '4rem', marginBottom: '6rem', flexDirection: 'row' }}>
-                            <div style={{ flex: 1 }}>
-                                <img src="/shifts-login-v2.png" alt="Worker Access Screen" style={{ width: '100%', borderRadius: '12px', border: '1px solid var(--glass-border)', boxShadow: '0 20px 40px -10px rgba(0,0,0,0.3)' }} />
+                        <div className="responsive-flex" style={{ marginBottom: '6rem' }}>
+                            <div style={{ flex: 1, width: '100%' }}>
+                                <div className="image-container-structured">
+                                    <img src="/shifts-login-v2.png" alt="Worker Access Screen" />
+                                </div>
                             </div>
                             <div style={{ flex: 1 }}>
                                 <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Frictionless Access</h2>
@@ -91,25 +96,28 @@ export default function ShiftsPage() {
                         </div>
 
                         {/* Feature 4: Worker Experience */}
-                        <div style={{ padding: '4rem', background: 'rgba(255,255,255,0.02)', borderRadius: '24px', border: '1px solid var(--glass-border)' }}>
-                            <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-                                <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Empower Your Workforce</h2>
-                                <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem' }}>A seamless experience designed for the people doing the work.</p>
+                        <div style={{ padding: '2rem', background: 'rgba(255,255,255,0.02)', borderRadius: '24px', border: '1px solid var(--glass-border)' }}>
+                            <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+                                <h2 style={{ fontSize: 'clamp(2rem, 5vw, 2.5rem)', marginBottom: '1rem' }}>Empower Your Workforce</h2>
+                                <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem' }}>A seamless experience designed for the people doing the work.</p>
                             </div>
-                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
+                            <div className="features-grid">
                                 <div>
-                                    <img src="/worker-alerts-v2.png" alt="Worker Alerts" style={{ width: '100%', borderRadius: '12px', marginBottom: '1.5rem', border: '1px solid var(--glass-border)' }} />
+                                    <div className="image-container-structured" style={{ marginBottom: '1.5rem' }}>
+                                        <img src="/worker-alerts-v2.png" alt="Worker Alerts" />
+                                    </div>
                                     <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Stay Informed</h3>
                                     <p style={{ color: 'var(--text-secondary)' }}>Workers get a clear, prioritized view of communications from management, ensuring important safety info and schedule changes are never missed.</p>
                                 </div>
                                 <div>
-                                    <img src="/worker-documents-v2.png" alt="Worker Documents" style={{ width: '100%', borderRadius: '12px', marginBottom: '1.5rem', border: '1px solid var(--glass-border)' }} />
+                                    <div className="image-container-structured" style={{ marginBottom: '1.5rem' }}>
+                                        <img src="/worker-documents-v2.png" alt="Worker Documents" />
+                                    </div>
                                     <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>On-the-Go Training</h3>
                                     <p style={{ color: 'var(--text-secondary)' }}>Digitize your training binders. The Documents Hub provides staff with instant access to policies, handbooks, and training materials from any device.</p>
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
                     <div className="features-grid">

@@ -80,11 +80,11 @@ export default function Home() {
 
       <section className="section-padding">
         <div className="container">
-          <div className="glass-card" style={{ padding: '4rem', display: 'flex', alignItems: 'center', gap: '4rem', overflow: 'hidden' }}>
+          <div className="glass-card responsive-flex" style={{ padding: '3rem', overflow: 'hidden' }}>
             <div style={{ flex: 1 }}>
               <span style={{ color: 'var(--brand-primary)', fontWeight: 700, textTransform: 'uppercase', fontSize: '0.8rem' }}>Flagship Product</span>
-              <h2 style={{ fontSize: '3rem', margin: '1rem 0' }}>GigaFlair Shifts</h2>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', marginBottom: '2rem' }}>
+              <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', margin: '1rem 0' }}>GigaFlair Shifts</h2>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', marginBottom: '2rem' }}>
                 The intuitive volunteer, seasonal, and deskless staff management platform designed to help
                 organizations save money and reduce hours of unnecessary administrative work.
               </p>
@@ -92,17 +92,13 @@ export default function Home() {
                 Learn More about Shifts
               </Link>
             </div>
-            <div style={{ flex: 1, position: 'relative' }}>
-              <img
-                src="/admin-schedule-v2.png"
-                alt="GigaFlair Shifts Schedule Dashboard"
-                style={{
-                  width: '100%',
-                  borderRadius: '12px',
-                  boxShadow: '0 20px 50px -12px rgba(0, 0, 0, 0.5)',
-                  border: '1px solid var(--glass-border)'
-                }}
-              />
+            <div style={{ flex: 1, width: '100%' }}>
+              <div className="image-container-structured">
+                <img
+                  src="/admin-schedule-v2.png"
+                  alt="GigaFlair Shifts Schedule Dashboard"
+                />
+              </div>
             </div>
           </div>
         </div>
