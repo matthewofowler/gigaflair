@@ -19,6 +19,9 @@ To synchronize all three backup locations at once, use the `all` remote:
 git push all main
 ```
 
+## Data Strategy
+As a landing page, GigaFlair is primarily driven by code. All "data" (layout, text, assets) is contained within the mirrored repository. No independent production database is utilized, maximizing simplicity and security.
+
 ## Setup Details
 
 ### Local Bare Repository
